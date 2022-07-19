@@ -6,7 +6,7 @@ export const DisplayList: FC = () => {
 		<div className='list__container'>
 			<div className="list__item">
 				<div className="list__item--checkbox">
-					<input type="checkbox" className='checkbox completed' name="is-complete" id="a" />
+					<input type="checkbox" name="is-complete" id="a" />
 				</div>
 				<div className="list__item--title">Do a thing</div>
 				<div className="list__item--options">...</div>
