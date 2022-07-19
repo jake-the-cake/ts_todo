@@ -16,6 +16,6 @@ app.get('/', (req,res) => {
 	res.status(200).send('hey, jake, but on the screen')
 })
 
-app.listen(process.env.PORT || 3000, () => {
-	console.log('server up on 3k')
+app.listen(process.env.PORT || 4200, () => {
+	console.log('server is live')
 })
