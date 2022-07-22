@@ -8,22 +8,29 @@
 	justify-content: space-between;
 	padding: 1rem;
 	border-bottom: 1px solid rgba(0,0,0,.1);
-	background-color: rgb(0,200,0,.1);
 }
 
 .list__item:last-child {
 	border-bottom: none;
 }
 
-.list__item:nth-child(even) {
-	background-color: rgba(200,200,0,.1);
-}
-
 .checkbox {
 	-webkit-appearance: none;
-	background-color: #fafafa;
+	background-color: #cacaca;
+	border: 1px solid #ed4321;
 	padding: 9px;
-	border-radius: 3px;
+	border-radius: 50%;
 	display: inline-block;
 	position: relative;
+	transition: box-shadow .4s, background-color .4s;
+}
+
+.completed > .list__item--title {
+	text-decoration: line-through;
+	font-style: italic;
+}
+
+.completed > .list__item--checkbox > .checkbox {
+	background-color: #ed4321;
+	box-shadow: 0px 0px 10px 3px #ed4321, 0px 0px 5px 3px #ed4321;
 }
