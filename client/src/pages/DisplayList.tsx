@@ -1,31 +1,40 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import '../static/list_styles.css'
 
-setTimeout(() => {
-	console.log('hi')
-},3000)
+interface DataProps {
+	text: string
+}
+
+const data: DataProps[] = [{
+		text: 'text'
+	},{
+		text: 'more text'
+	},{
+		text: 'even more text'
+	}]
 
 export const DisplayList: FC = () => {
-	const handleClick = () => {
-		document.getElementById('a')?.classList.toggle('completed')
+	const handleClick = (key: string) => {
+		console.log(key)
+		document.getElementById(key)?.classList.toggle('completed')
 	}
 
 	return (
 		<div className='list__container'>
-			<div className="list__item completed" id='a' onClick={handleClick}>
-				<div className="list__item--checkbox">
-					<input type="checkbox" className='checkbox' name="is-complete" />
-				</div>
-				<div className="list__item--title">Do a thing</div>
-				<div className="list__item--options">...</div>
-			</div>
-			<div className="list__item">
-				<div className="list__item--checkbox">
-					<input type="checkbox" className='checkbox' name="is-complete" />
-				</div>
-				<div className="list__item--title">Do a thing</div>
-				<div className="list__item--options">...</div>
-			</div>
+			{
+				data.map((item: DataProps, index: number) => {
+					const key = String(index)
+					return (
+						<div className="list__item" id={key} key={key} onClick={()=>handleClick(key)}>
+							<div className="list__item--checkbox">
+								<input type="checkbox" className='checkbox' name="is-complete" />
+							</div>
+							<div className="list__item--title">{item.text}</div>
+							<div className="list__item--options">...</div>
+						</div>
+					)
+				}) as ReactNode
+			}
 		</div>
 	)
 }
