@@ -1,0 +1,33 @@
+.modal-bg {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0,0,0,.7);
+	transition: transform .4s;
+}
+
+.modal-hidden {
+	transform: scale(0);
+}
+
+.modal-card {
+	padding: 2rem;
+	background-color: #ededed;
+	border-radius: .5rem;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.modal-card input {
+	padding: .6rem 1rem;
+	border-radius: .3rem;
+	border: 3px solid #669966;
+	outline: none;
+}
