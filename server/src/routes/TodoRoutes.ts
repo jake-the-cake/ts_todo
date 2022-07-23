@@ -35,6 +35,7 @@ router.get('/list', async (req,res) => {
 })
 
 router.post('/add', async (req,res) => {
+	console.log(LogString('post',req.path, res.statusCode))
 	try {
 		const data = await new TodoModel(req.body)
 		res.status(201).json(data)

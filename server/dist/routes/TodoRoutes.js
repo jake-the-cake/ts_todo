@@ -35,6 +35,7 @@ router.get('/list', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 }));
 router.post('/add', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(LogString('post', req.path, res.statusCode));
     try {
         const data = yield new TodoModel(req.body);
         res.status(201).json(data);
