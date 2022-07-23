@@ -46,4 +46,17 @@ router.post('/add', async (req,res) => {
 	}
 })
 
+router.patch('/item/:id/status-change', async (req,res) => {
+	console.log(LogString('patch', req.path, res.statusCode))
+	try {
+		const data = await TodoModel.findById(req.params.id)
+		data!.isComplete = !data!.isComplete
+		data?.save()
+		res.status(200).json(data)
+	}
+	catch (err: any) {
+		ThrowError(res,err)
+	}
+})
+
 export default router

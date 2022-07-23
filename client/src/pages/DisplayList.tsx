@@ -26,11 +26,6 @@ export const DisplayList: FC = () => {
 		}
 	}, [])
 
-	if (posts.length > 0) {
-		posts[2].isComplete = true
-		posts.forEach((post: DataProps) => console.log(post.isComplete))
-	}
-
 	return (
 		<>
 			<AddItem />
@@ -38,8 +33,9 @@ export const DisplayList: FC = () => {
 				{
 					posts.length > 0 && posts.map((item: DataProps, index: number) => {
 						const key = String(index)
+						console.log(item)
 						return (
-							<div className="list__item" id={key} key={key} onClick={()=>handleClick(key)}>
+							<div className={`list__item ${item.isComplete === true && 'completed'}`} id={key} key={key} onClick={()=>handleClick(key)}>
 								<div className="list__item--checkbox">
 									<input type="checkbox" className="checkbox" name="is-complete" />
 								</div>

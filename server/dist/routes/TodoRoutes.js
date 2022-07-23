@@ -45,4 +45,16 @@ router.post('/add', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         ThrowError(res, err);
     }
 }));
+router.patch('/item/:id/status-change', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(LogString('patch', req.path, res.statusCode));
+    try {
+        const data = yield TodoModel.findById(req.params.id);
+        data.isComplete = !data.isComplete;
+        data === null || data === void 0 ? void 0 : data.save();
+        res.status(200).json(data);
+    }
+    catch (err) {
+        ThrowError(res, err);
+    }
+}));
 export default router;
