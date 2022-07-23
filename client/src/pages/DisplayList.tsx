@@ -12,17 +12,16 @@ interface DataProps {
 export const DisplayList: FC = () => {
 	const [posts, setPosts]: any = useState([])
 
-	const handleClick = (key: string) => {
+	const handleClick = async (key: string, item: any) => {
 		document.getElementById(key)?.classList.toggle('completed')
-	}
-
-	const getData: any = async () => {
-		setPosts(await axios.get('http://localhost:4200/todo/list').then(res=>res.data))
+		await axios.patch(`http://localhost:4200/todo/item/${item._id}/status-change`)
 	}
 
 	useEffect(() => {
 		if (posts.length === 0) {
-			getData()
+			(async () => {
+				setPosts(await axios.get('http://localhost:4200/todo/list').then(res=>res.data))
+			})()
 		}
 	}, [])
 
@@ -33,9 +32,8 @@ export const DisplayList: FC = () => {
 				{
 					posts.length > 0 && posts.map((item: DataProps, index: number) => {
 						const key = String(index)
-						console.log(item)
 						return (
-							<div className={`list__item ${item.isComplete === true && 'completed'}`} id={key} key={key} onClick={()=>handleClick(key)}>
+							<div className={`list__item ${item.isComplete === true && 'completed'}`} id={key} key={key} onClick={()=>handleClick(key, item)}>
 								<div className="list__item--checkbox">
 									<input type="checkbox" className="checkbox" name="is-complete" />
 								</div>
@@ -46,7 +44,7 @@ export const DisplayList: FC = () => {
 					}) as ReactNode
 				}
 			</div>
-			<AddItemModal />
+			<AddItemModal posts={posts} setPosts={setPosts} />
 		</>
 	)
 }

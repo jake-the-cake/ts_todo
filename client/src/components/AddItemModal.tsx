@@ -9,14 +9,15 @@ const toggleModal = (e: any | null) => {
 	}
 }
 
-export default () => {
+export default (props:any) => {
 	const handleAdd = async () => {
-		const text = (document.getElementById('modal-text') as HTMLInputElement).value
+		const input = (document.getElementById('modal-text') as HTMLInputElement)
+		const text = input.value
 		const data = await axios.post('http://localhost:4200/todo/add', {
 			text: text
-		})
-		console.log(await data)
+		}).then(res => props.setPosts([...props.posts, res.data]))
 		toggleModal(null)
+		input.value = '' 
 	}
 
 	return (
