@@ -10,9 +10,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import express from 'express';
 import TodoModel from '../models/TodoModel.js';
 const router = express.Router();
-router.get('/', (req, res) => {
-    res.send('page');
-});
+const ThrowError = (res, err) => {
+    const status = err.status = res.statusCode;
+    res.status(status).json(ErrorJson(err));
+};
+const ErrorJson = (err) => {
+    return {
+        'isError': true,
+        'message': err.message,
+        'status': err.status
+    };
+};
+const LogString = (method, reqPath, status) => {
+    return (`${new Date().toLocaleDateString('en-US')} @ ${new Date().toLocaleTimeString('en-US')} :: '${method.toUpperCase()}' Request for '/todo${reqPath}' -- Status: ${status}`);
+};
+router.get('/list', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(LogString('get', req.path, res.statusCode));
+    try {
+        const data = yield TodoModel.find();
+        res.status(200).json(data);
+    }
+    catch (err) {
+        ThrowError(res, err);
+    }
+}));
 router.post('/add', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield new TodoModel(req.body);
@@ -20,7 +41,7 @@ router.post('/add', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         data.save().catch(err => console.error(err.message));
     }
     catch (err) {
-        console.error(err.message);
+        ThrowError(res, err);
     }
 }));
 export default router;
