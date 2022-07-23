@@ -8,6 +8,10 @@ const handleClick = () => {
 }
 export default () => {
 	return (
-		<button onClick={handleClick}>Add New Item</button>
+		<div className='list-header'>
+			<span className='list-title'>Things To Do</span>
+			<button className="list-add-button" onClick={handleClick}>+</button>
+		</div>
+
 	)
 }

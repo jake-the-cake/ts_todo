@@ -59,4 +59,15 @@ router.patch('/item/:id/status-change', async (req,res) => {
 	}
 })
 
+router.delete('/item/:id/remove', async (req,res) => {
+	console.log(LogString('delete', req.path, res.statusCode))
+	try {
+		const data = await TodoModel.findByIdAndDelete(req.params.id)
+		res.status(200).json(data)
+	}
+	catch (err:any) {
+		ThrowError(res,err)
+	}
+})
+
 export default router

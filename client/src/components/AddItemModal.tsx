@@ -25,7 +25,7 @@ export default (props:any) => {
 			<div className="modal-card" id="modal-card">
 				<span>Enter the task below:</span>
 				<input type="text" id="modal-text" />
-				<button onClick={handleAdd}>Add</button>
+				<button onClick={handleAdd} id="add-button">Add</button>
 			</div>
 		</div>
 	)

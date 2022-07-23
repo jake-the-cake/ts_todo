@@ -57,4 +57,14 @@ router.patch('/item/:id/status-change', (req, res) => __awaiter(void 0, void 0, 
         ThrowError(res, err);
     }
 }));
+router.delete('/item/:id/remove', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(LogString('delete', req.path, res.statusCode));
+    try {
+        const data = yield TodoModel.findByIdAndDelete(req.params.id);
+        res.status(200).json(data);
+    }
+    catch (err) {
+        ThrowError(res, err);
+    }
+}));
 export default router;
