@@ -14,8 +14,9 @@ export const DisplayList: FC = () => {
 	const [posts, setPosts]: any = useState([])
 
 	const handleClick = async (e:any, key: string, item: any) => {
-		console.log(e.target)
-		if (e.target.id === 'delete') handleDelete(item._id)
+		if (e.target.id === 'delete') {
+			return handleDelete(item._id)
+		}
 		document.getElementById(key)?.classList.toggle('completed')
 		await axios.patch(`http://localhost:4200/todo/item/${item._id}/status-change`)
 	}
@@ -46,7 +47,7 @@ export const DisplayList: FC = () => {
 									<input type="checkbox" className="checkbox" name="is-complete" />
 								</div>
 								<div className="list__item--title">{item.text}</div>
-								<div className="list__item--options" onClick={() => {handleDelete(item._id)}} id="delete">x</div>
+								<div className="list__item--options" id="delete">x</div>
 							</div>
 						)
 					}) as ReactNode
